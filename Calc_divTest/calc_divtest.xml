@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="calc_divtest" default="all">
+  
+  
+  <property file="calc_divtest.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.sqlite-jdbc-3.8.11.2.classpath">
+    <pathelement location="${basedir}/sqlite-jdbc-3.8.11.2.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Calc_divTest -->
+  
+  <dirname property="module.calc_divtest.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.calc_divtest" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.calc_divtest" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.calc_divtest" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.calc_divtest" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="calc_divtest.output.dir" value="${module.calc_divtest.basedir}/out/production/Calc_divTest"/>
+  <property name="calc_divtest.testoutput.dir" value="${module.calc_divtest.basedir}/out/test/Calc_divTest"/>
+  
+  <path id="calc_divtest.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="calc_divtest.module.production.classpath">
+    <path refid="${module.jdk.classpath.calc_divtest}"/>
+    <path refid="library.sqlite-jdbc-3.8.11.2.classpath"/>
+  </path>
+  
+  <path id="calc_divtest.runtime.production.module.classpath">
+    <pathelement location="${calc_divtest.output.dir}"/>
+    <path refid="library.sqlite-jdbc-3.8.11.2.classpath"/>
+  </path>
+  
+  <path id="calc_divtest.module.classpath">
+    <path refid="${module.jdk.classpath.calc_divtest}"/>
+    <pathelement location="${calc_divtest.output.dir}"/>
+    <path refid="library.sqlite-jdbc-3.8.11.2.classpath"/>
+  </path>
+  
+  <path id="calc_divtest.runtime.module.classpath">
+    <pathelement location="${calc_divtest.testoutput.dir}"/>
+    <pathelement location="${calc_divtest.output.dir}"/>
+    <path refid="library.sqlite-jdbc-3.8.11.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.calc_divtest">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.calc_divtest">
+    <patternset refid="excluded.from.module.calc_divtest"/>
+  </patternset>
+  
+  <path id="calc_divtest.module.sourcepath">
+    <dirset dir="${module.calc_divtest.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.calc_divtest" depends="compile.module.calc_divtest.production,compile.module.calc_divtest.tests" description="Compile module Calc_divTest"/>
+  
+  <target name="compile.module.calc_divtest.production" depends="register.custom.compilers" description="Compile module Calc_divTest; production classes">
+    <mkdir dir="${calc_divtest.output.dir}"/>
+    <javac2 destdir="${calc_divtest.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.calc_divtest}/javac">
+      <compilerarg line="${compiler.args.calc_divtest}"/>
+      <bootclasspath refid="calc_divtest.module.bootclasspath"/>
+      <classpath refid="calc_divtest.module.production.classpath"/>
+      <src refid="calc_divtest.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.calc_divtest"/>
+    </javac2>
+    
+    <copy todir="${calc_divtest.output.dir}">
+      <fileset dir="${module.calc_divtest.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.calc_divtest.tests" depends="register.custom.compilers,compile.module.calc_divtest.production" description="compile module Calc_divTest; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.calc_divtest" description="cleanup module">
+    <delete dir="${calc_divtest.output.dir}"/>
+    <delete dir="${calc_divtest.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.calc_divtest" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.calc_divtest" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.calc_divtest:jar" value="${basedir}/out/artifacts/Calc_divTest_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.Calc_divTest.jar" value="${artifacts.temp.dir}/Calc_divTest.jar"/>
+  </target>
+  
+  <target name="artifact.calc_divtest:jar" depends="init.artifacts, compile.module.calc_divtest" description="Build &#39;Calc_divTest:jar&#39; artifact">
+    <property name="artifact.temp.output.calc_divtest:jar" value="${artifacts.temp.dir}/Calc_divTest_jar"/>
+    <mkdir dir="${artifact.temp.output.calc_divtest:jar}"/>
+    <jar destfile="${temp.jar.path.Calc_divTest.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${calc_divtest.output.dir}"/>
+      <zipfileset src="${basedir}/sqlite-jdbc-3.8.11.2.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.Calc_divTest.jar}" tofile="${artifact.temp.output.calc_divtest:jar}/Calc_divTest.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.calc_divtest:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.calc_divtest:jar}"/>
+    <copy todir="${artifact.output.calc_divtest:jar}">
+      <fileset dir="${artifact.temp.output.calc_divtest:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
